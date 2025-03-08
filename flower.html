@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bông Hoa Hồng</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Để đảm bảo pháo bông không ra ngoài màn hình */
+        }
+
+        /* Container chứa bông hoa */
+        .flower {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: none; /* Ẩn bông hoa ban đầu */
+            animation: shake 0.5s infinite alternate; /* Lắc nhẹ bông hoa */
+        }
+
+        /* Cánh hoa ngoài */
+        .petal-outside {
+            position: absolute;
+            width: 90px;
+            height: 120px;
+            background-color: #f5a9b8; /* Màu hồng nhạt */
+            border-radius: 50%;
+        }
+
+        /* Vị trí các cánh hoa ngoài */
+        .petal-outside:nth-child(1) { top: 0; left: 55px; transform: rotate(0deg); }
+        .petal-outside:nth-child(2) { top: 30px; left: 120px; transform: rotate(45deg); }
+        .petal-outside:nth-child(3) { top: 90px; left: 140px; transform: rotate(90deg); }
+        .petal-outside:nth-child(4) { top: 160px; left: 120px; transform: rotate(135deg); }
+        .petal-outside:nth-child(5) { top: 190px; left: 55px; transform: rotate(180deg); }
+        .petal-outside:nth-child(6) { top: 160px; left: -10px; transform: rotate(225deg); }
+        .petal-outside:nth-child(7) { top: 90px; left: -30px; transform: rotate(270deg); }
+        .petal-outside:nth-child(8) { top: 30px; left: -10px; transform: rotate(315deg); }
+
+        /* Cánh hoa trong */
+        .petal-inside {
+            position: absolute;
+            width: 60px;
+            height: 100px;
+            background-color: #f7c4d6; /* Màu hồng nhạt hơn */
+            border-radius: 60%;
+        }
+
+        /* Vị trí các cánh hoa trong */
+        .petal-inside:nth-child(9) { top: 28px; left: 70px; transform: rotate(0deg); }
+        .petal-inside:nth-child(10) { top: 58px; left: 130px; transform: rotate(45deg); }
+        .petal-inside:nth-child(11) { top: 118px; left: 150px; transform: rotate(90deg); }
+        .petal-inside:nth-child(12) { top: 168px; left: 130px; transform: rotate(135deg); }
+        .petal-inside:nth-child(13) { top: 188px; left: 70px; transform: rotate(180deg); }
+        .petal-inside:nth-child(14) { top: 168px; left: 10px; transform: rotate(225deg); }
+        .petal-inside:nth-child(15) { top: 118px; left: -10px; transform: rotate(270deg); }
+        .petal-inside:nth-child(16) { top: 58px; left: 10px; transform: rotate(315deg); }
+
+        /* Nhụy hoa */
+        .center {
+            position: absolute;
+            top: 115px;
+            left: 60px;
+            width: 85px;
+            height: 85px;
+            background-color: #f1c40f; /* Màu vàng */
+            border-radius: 50%;
+        }
+
+        /* Hiệu ứng lắc lắc */
+        @keyframes shake {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        /* Style cho nút */
+        .button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Dòng chữ */
+        .message {
+            font-size: 30px;
+            margin-top: 120px;
+            display: none; /* Ẩn dòng chữ ban đầu */
+            font-weight: bold;
+            color: #ff4b5c;
+        }
+
+        /* Hiệu ứng pháo bông */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #ffea00;
+            animation: fireworkAnimation 1s forwards;
+        }
+
+        @keyframes fireworkAnimation {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.5) translate(var(--x), var(--y));
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2) translate(var(--x), var(--y));
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="button" id="showFlowerButton">Click vào đây nhận quà</button>
+
+    <div class="flower" id="flower">
+        <!-- Cánh hoa ngoài -->
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+        <div class="petal-outside"></div>
+
+        <!-- Cánh hoa trong -->
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+        <div class="petal-inside"></div>
+
+        <!-- Nhụy hoa -->
+        <div class="center"></div>
+    </div>
+
+    <div class="message" id="message">Chúc mừng 8/3 cún con của daddy</div>
+
+    <script>
+        document.getElementById('showFlowerButton').onclick = function() {
+            // Ẩn nút khi click
+            this.style.display = 'none';
+
+            // Hiển thị bông hoa và dòng chữ
+            document.getElementById('flower').style.display = 'block';
+            document.getElementById('message').style.display = 'block';
+
+            // Hiệu ứng pháo bông
+            createFireworks();
+        }
+
+        function createFireworks() {
+            const fireworksCount = 10; // Số lượng tia sáng của pháo bông
+            for (let i = 0; i < fireworksCount; i++) {
+                let firework = document.createElement('div');
+                firework.classList.add('firework');
+
+                // Tạo các hướng ngẫu nhiên cho tia sáng
+                const angle = Math.random() * 360; // Góc ngẫu nhiên từ 0 đến 360 độ
+                const distance = Math.random() * 200 + 50; // Khoảng cách ngẫu nhiên từ 50px đến 250px
+
+                // Tính toán vị trí tia sáng
+                const x = distance * Math.cos(angle * Math.PI / 180);
+                const y = distance * Math.sin(angle * Math.PI / 180);
+
+                // Thêm biến động `--x` và `--y` vào CSS để điều chỉnh vị trí tia sáng
+                firework.style.setProperty('--x', `${x}px`);
+                firework.style.setProperty('--y', `${y}px`);
+
+                // Đặt vị trí bắt đầu của tia sáng
+                firework.style.top = '50%';
+                firework.style.left = '50%';
+
+                document.body.appendChild(firework);
+
+                // Xóa pháo bông sau khi hiệu ứng kết thúc
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>
